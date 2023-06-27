@@ -1,0 +1,100 @@
+Sub alphabetical_testing()
+    For Each ws In Worksheets
+        ws.Activate
+        
+        Range("I1").Value = "Ticker"
+        Range("J1").Value = "Yearly Change"
+        Range("K1").Value = "Percent Change"
+        Range("L1").Value = "Total Stock Volume"
+        Range("O2").Value = "Greatest % Increase"
+        Range("O3").Value = "Greatest % Decrease"
+        Range("O4").Value = "Greatest Total Volume"
+        
+        
+        ws.Columns("I:L").AutoFit
+
+        
+        Total_Volume = 0
+        Open_Pointer = 2
+        My_Pointer = 2
+        Range("P2:Q4").ClearContents
+        
+        row_count = Cells(Rows.Count, "A").End(xlUp).Row
+        
+        For i = 2 To row_count
+        
+            If Cells(i, "A").Value = Cells(i + 1, "A").Value Then
+                Total_Volume = Total_Volume + Cells(i, "G").Value
+                
+            Else
+                Total_Volume = Total_Volume + Cells(i, "G").Value
+                Open_Price = Cells(Open_Pointer, "C").Value
+                
+                Close_Price = Cells(i, "F").Value
+                
+                Yearly_Change = Close_Price - Open_Price
+                
+                Percentage_Change = Yearly_Change / Open_Price
+                
+                Cells(My_Pointer, "I").Value = Cells(i, "A").Value
+                
+                Cells(My_Pointer, "J").Value = Yearly_Change
+                
+                Cells(My_Pointer, "K").Value = Percentage_Change
+                
+                Cells(My_Pointer, "L").Value = Total_Volume
+                
+                If Yearly_Change > 0 Then
+                
+                    Cells(My_Pointer, "J").Interior.ColorIndex = 4
+                    Cells(My_Pointer, "K").Interior.ColorIndex = 4
+                Else
+                    Cells(My_Pointer, "J").Interior.ColorIndex = 3
+                    Cells(My_Pointer, "K").Interior.ColorIndex = 3
+                End If
+            
+                If Range("Q2").Value < Percentage_Change Then
+                    Range("P2").Value = Cells(i, "A").Value
+                    Range("Q2").Value = Percentage_Change
+                
+                End If
+                
+                If Range("Q3").Value > Percentage_Change Then
+                    Range("P3").Value = Cells(i, "A").Value
+                    Range("Q3").Value = Percentage_Change
+                    
+                End If
+                
+                If Range("Q4").Value < Total_Volume Then
+                    Range("P4").Value = Cells(i, "A").Value
+                    Range("Q4").Value = Total_Volume
+                
+                End If
+                
+                
+        
+                
+                Total_Volume = 0
+                
+                Open_Pointer = i + 1
+                
+                My_Pointer = My_Pointer + 1
+                
+             End If
+             
+        Next i
+        
+        
+                
+                
+                
+                
+                
+                
+            
+
+
+    Next ws
+    
+End Sub
+
