@@ -1,7 +1,7 @@
 # VBA_challenge
 Analysis of the stock market data
 I have tried to analyse the stock market data. 
-I started with the alphabetical testing file. I wrote my code but lodt it. 
+I started with the alphabetical testing file. I wrote my code but lost it. 
 I used a tutor to regain my code.
 ![image](https://github.com/mshidhaye/VBA_challenge/assets/135628020/68104556-94f7-4922-a5c3-988172406924)
 from the multiple stock data excel file
